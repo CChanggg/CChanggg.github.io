@@ -158,35 +158,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-有关Generator-函数的学习 " class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/06/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/08/23/有关Generator-函数的学习 /">有关Generator 函数的学习</a>
     </h1>
   
 
         
-        <a href="/2017/08/06/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-06T13:44:07.819Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
+        <a href="/2017/08/23/有关Generator-函数的学习 /" class="archive-article-date">
+  	<time datetime="2017-08-23T13:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们都知道javascript是一门单线程语言，在同一个时间内只能做一件事情。基于这个，对于 <strong>异步任务（asynchronous）</strong> 需要进行异步编程，一般有一下几种应对策略：</p>
+<ol>
+<li>回调函数</li>
+<li>事件模式 ( 回调函数的事件化，在jQuery等类库中非常常见 )</li>
+<li>Promise</li>
+<li>Generator</li>
+</ol>
+<p>最近学习了第四种方法也就是Generator函数，就记录一下学习过程(〃’▽’〃)</p>
+<h2 id="Generator的概念和用法"><a href="#Generator的概念和用法" class="headerlink" title="Generator的概念和用法"></a>Generator的概念和用法</h2><p>上面提到的几种方法都是回调函数来实现的，或者说是对回调函数的封装，<strong>Generator</strong> 是ES6中提出来的新方法，要说它最大的特点应该就是可以实现函数的暂停、启动。</p>
+<p>下面我们来看一个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">url</span>) </span>&#123;</div><div class="line">            fetch(url)</div><div class="line">                .then(<span class="function"><span class="params">data</span> =&gt;</span> data.json())</div><div class="line">                .then(<span class="function"><span class="params">data</span> =&gt;</span> dataGen.next(data))</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// Generator函数是生成器函数   不能直接用来执行 要先生成迭代器</span></div><div class="line">        <span class="function"><span class="keyword">function</span>* <span class="title">steps</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="comment">// 可以停下来</span></div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'feching beers'</span>)</div><div class="line">            <span class="keyword">const</span> beers = yieldajax(<span class="string">'http://api.react.beer/v2/search?q=hops&amp;type=beer'</span>)</div><div class="line">            <span class="built_in">console</span>.log(beers)</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'feching wes'</span>)</div><div class="line">            <span class="keyword">const</span> wes = <span class="keyword">yield</span> ajax(<span class="string">'https://api.github.com/users/CChanggg'</span>)</div><div class="line">            <span class="built_in">console</span>.log(wes)</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'fetching fat joe'</span>)</div><div class="line">            <span class="keyword">const</span> fatJoe = <span class="keyword">yield</span> ajax(<span class="string">'https://api.discogs.com/artists/51988'</span>)</div><div class="line">            <span class="built_in">console</span>.log(fatJoe)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 迭代器 Iterator </span></div><div class="line">        <span class="keyword">const</span> dataGen = steps()</div><div class="line">        dataGen.next()</div></pre></td></tr></table></figure></p>
+<p>在这个例子中用到了 <strong>FetchAPI</strong> 。<br><code>response.json()</code>返回promise对象，<code>.then</code>方法后，即可返回服务器的<code>responseData</code>。</p>
+<p>首先执行 Generator 函数，获取遍历器对象，然后使用 next 方法，执行异步任务的第一阶段。由于 Fetch 模块返回的是一个 Promise 对象，因此要用 then 方法调用下一个next 方法。</p>
+<p>在上面的例子中我们可以一个个打印对应API中获取获取到的内容，在所有异步操作需要暂停的地方，都用 <code>yield</code> 语句注明。</p>
+<p>我们再来看个详细点的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> inventors = [&#123;</div><div class="line">            first: <span class="string">'Albert'</span>,</div><div class="line">            last: <span class="string">'Einstein'</span>,</div><div class="line">            year: <span class="number">1879</span></div><div class="line">        &#125;, &#123;</div><div class="line">            first: <span class="string">'Isaac'</span>,</div><div class="line">            last: <span class="string">'Newton'</span>,</div><div class="line">            year: <span class="number">1643</span></div><div class="line">        &#125;, &#123;</div><div class="line">            first: <span class="string">'Galileo'</span>,</div><div class="line">            last: <span class="string">'Galilei'</span>,</div><div class="line">            year: <span class="number">1564</span></div><div class="line">        &#125;, &#123;</div><div class="line">            first: <span class="string">'Marie'</span>,</div><div class="line">            last: <span class="string">'Curie'</span>,</div><div class="line">            year: <span class="number">1867</span></div><div class="line">        &#125;, &#123;</div><div class="line">            first: <span class="string">'Johannes'</span>,</div><div class="line">            last: <span class="string">'Kepler'</span>,</div><div class="line">            year: <span class="number">1571</span></div><div class="line">        &#125;]</div></pre></td></tr></table></figure></p>
+<p>基于上面的代码，我们现在有一个需求，就是需要让 inventors 里的 Object 一个个输出，这个时候就可以用上我们的 Generator 函数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">loop</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">const</span> inventor <span class="keyword">of</span> inventors) &#123;</div><div class="line">                <span class="built_in">console</span>.log(inventor)</div><div class="line">                <span class="keyword">yield</span> inventors</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">const</span> g = loop()</div><div class="line">        g.next()</div><div class="line">        g.next()</div><div class="line">        g.next()</div><div class="line">        g.next()</div><div class="line">        g.next()</div></pre></td></tr></table></figure></p>
+<p> 这时候我们就可以看到对象被一个个输出了</p>
+<p><img src="http://chuantu.biz/t6/18/1503499440x3060454545.png" alt="avatar"></p>
+<p>在上面代码中，调用 Generator 函数，也就是<code>function* loop（）</code>会返回一个内部指针，也就是 <strong>变量器</strong>。 执行这个函数不会返回结果，返回的是指针对象。调用指针 g 的 `next`` 方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的 yield 语句，也就是输出对象为止。</p>
+<h2 id="使用方法进阶"><a href="#使用方法进阶" class="headerlink" title="使用方法进阶"></a>使用方法进阶</h2><p>看了上面的例子，我们对Generator 函数也就稍微有了一些理解，但是如果当我们要一个个输出很多内容时候，就需要很多个<code>.next()</code>的调用，就很麻烦，这个时候我们就想要一个方法可以 <strong>自动</strong> 去输出。<br>来看看下面这个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="keyword">var</span> h = <span class="keyword">yield</span> <span class="built_in">Promise</span>.resolve(<span class="string">'hello'</span>)</div><div class="line">          <span class="built_in">console</span>.log(h)</div><div class="line">          <span class="keyword">var</span> w = <span class="keyword">yield</span> <span class="built_in">Promise</span>.resolve(<span class="string">'world'</span>)</div><div class="line">          <span class="built_in">console</span>.log(w)</div><div class="line">      &#125;</div><div class="line">      <span class="comment">// const iteratorGen = gen()</span></div><div class="line">      <span class="comment">// console.log(iteratorGen.next())//用于启动</span></div><div class="line">      <span class="comment">// console.log(iteratorGen.next('h'))</span></div><div class="line">      <span class="comment">// console.log(iteratorGen.next('w'))</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">co</span>(<span class="params">gen</span>) </span>&#123;</div><div class="line">      <span class="comment">// 实现自动执行generator</span></div><div class="line">      <span class="comment">// done true</span></div><div class="line">      <span class="keyword">var</span> iter = gen()</div><div class="line">      <span class="keyword">var</span> ret = iter.next()</div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">ret</span>) </span>&#123;</div><div class="line">          ret.value.then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">              ret = iter.next(res)</div><div class="line">              <span class="keyword">if</span> (ret.done) <span class="keyword">return</span></div><div class="line">              next(ret)</div><div class="line">          &#125;)</div><div class="line">      &#125;</div><div class="line">      next(ret)</div><div class="line">  &#125;</div><div class="line">  co(gen)</div></pre></td></tr></table></figure></p>
+<p>在上面的代码中在 <code>function* gen()</code>无论有多少个需要输出的对象都会自动一个个的输出来，这是为什么呢？<br>上面代码的 <strong>co</strong> 函数，就是一个 Generator 函数的自动执行器。<br>在 <strong>co</strong> 函数中的内部函数 next 先将指针移到 Generator 函数的下一步（iter.next 方法），然后判断 Generator 函数是否结束（ret.done 属性），如果没结束，就将 next 函数再传入 <strong>co</strong> 函数，否则就直接退出。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当然自动执行器还有多种实现方法，比如promise啥的，这里举出来的只是一个简单的例子。进一步的学习可以看看tj大大在<a href="https://github.com/tj/co" target="_blank" rel="external">GitHub</a>上的内容。<br>上面就是学习过程中的总结，有任何不对的地方，欢迎指点。（づ￣3￣）づ╭❤～</p>
 
       
 
@@ -195,11 +207,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">异步编程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/06/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/08/23/有关Generator-函数的学习 /">展开全文 >></a>
         </p>
       
 
@@ -316,6 +347,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">异步编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

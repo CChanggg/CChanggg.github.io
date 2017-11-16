@@ -8,20 +8,23 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>有关缓存笔记 | CChang:)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&quot;:&quot; cache-directive ```1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;gt; 作为请求首部时，cache-directive的可">
-<meta name="keywords" content="浏览器缓存,学习笔记,http">
+  <meta name="description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&amp;quot;Cache-Control&amp;quot; :&amp;quot; cache-directive &amp;quot;  作为请求首部时，cache-directive的可选值     字段名称 说明     no-cache 告知（代理）服务器不直接使用缓存，要求向原服务器发起请">
+<meta name="keywords" content="学习笔记,浏览器缓存,http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有关缓存笔记">
 <meta property="og:url" content="http://yoursite.com/2017/11/16/有关缓存笔记/index.html">
 <meta property="og:site_name" content="CChang:)">
-<meta property="og:description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&quot;:&quot; cache-directive ```1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;gt; 作为请求首部时，cache-directive的可">
+<meta property="og:description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&amp;quot;Cache-Control&amp;quot; :&amp;quot; cache-directive &amp;quot;  作为请求首部时，cache-directive的可选值     字段名称 说明     no-cache 告知（代理）服务器不直接使用缓存，要求向原服务器发起请">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161240301-2050921595.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161311394-1246877214.png">
-<meta property="og:updated_time" content="2017-11-16T11:44:32.280Z">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401171410441-767100632.png">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/3/4/256d423d1f942dc6c656b4c600b58316.png?imageView2/0/w/1280/h/960/ignore-error/1">
+<meta property="og:updated_time" content="2017-11-16T12:50:19.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="有关缓存笔记">
-<meta name="twitter:description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&quot;:&quot; cache-directive ```1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;gt; 作为请求首部时，cache-directive的可">
+<meta name="twitter:description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&amp;quot;Cache-Control&amp;quot; :&amp;quot; cache-directive &amp;quot;  作为请求首部时，cache-directive的可选值     字段名称 说明     no-cache 告知（代理）服务器不直接使用缓存，要求向原服务器发起请">
 <meta name="twitter:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png">
   
     <link rel="alternative" href="/atom.xml" title="CChang:)" type="application/atom+xml">
@@ -181,7 +184,117 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="与缓存相关的http首部字段"><a href="#与缓存相关的http首部字段" class="headerlink" title="与缓存相关的http首部字段"></a>与缓存相关的http首部字段</h2><h3 id="通用首部字段"><a href="#通用首部字段" class="headerlink" title="通用首部字段"></a>通用首部字段</h3><p><img src="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png" alt="通用首部字段"></p>
-<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>在RFC中规范了 Cache-Control 的格式为：<figure class="highlight plain"><figcaption><span>":" cache-directive ```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; 作为请求首部时，cache-directive的可选值</div><div class="line"></div><div class="line">| 字段名称 | 说明 |  </div><div class="line">| -------- | :----- | </div><div class="line">| no-cache | 告知（代理）服务器不直接使用缓存，要求向原服务器发起请求  |   </div><div class="line">| no-store | 所有内容都不会被保存到缓存或 Internet临时文件中  |   </div><div class="line">| max-age=delta-seconds | 告知服务器客户端希望接收一个存在时间（Age）不大于delta-seconds秒的资源 |   </div><div class="line">| max-stale[=delta-seconds] | 告知（代理）服务器端愿意接收一个超过缓存时间的资源，若定义delta-seconds则为delta-seconds秒，若没有则为任意超出时间  |</div><div class="line">| min-fresh=delta-seconds | 所有内容都不会被保存到缓存或 Internet临时文件中  |  </div><div class="line">| no-transform | 告知（代理）服务器客户端希望获取实体数据没有被转换（比如压缩）过的资源  |</div><div class="line">| only-if-cached | 告知（代理）服务器客户端希望获取缓存的内容（若有）， 而不用向原服务器发去请求 |  </div><div class="line">| cache-extension | 自定义扩展值，若服务器不识别该值将被忽略掉  | </div><div class="line"></div><div class="line">&gt; 作为响应首部时，cache-directive 的可选值</div><div class="line"></div><div class="line">| 字段名称 | 说明 |  </div><div class="line">| -------- | :----- | </div><div class="line">| public | 指示响应可以被任何缓存所缓存，即使通常它只是非可缓存或可缓存到一个非共享缓存内  | </div><div class="line">| private | 指示响应信息的全部或者部分用于单个用户，而不能用一个共享缓存来缓存  |  </div><div class="line">| no-cache | 可以缓存，但是只有在跟WEB服务器验证了其有效后，才能返回给客户端 |  </div><div class="line">| no-store |  所有内容不会被保存到缓存或Internet临时文件中，指令的目的是防止无心发布或是保留了敏感信息（例如，备份）| </div><div class="line">| no-transform | 告知客户端缓存文件时不得对实体数据做任何改变。它对 __转换某个实体体的媒体类型__ 很有用，例如，一个非透明的代理把图像转换格式，以节省缓存空间，或是减少慢速链接中的通信量 |  </div><div class="line">| only-if-cached | 在某些情况下，如网络连接非常差时，客户端可能需要一个缓存，只返回目前已存储的那些响应，而不是重新加载，或与源服务器重新验证。要做到这一点，客户端可以在一个请求中包含该指令。|</div><div class="line">| must-revalidate | 当前资源一定是向原服务器发去验证请求的，若请求失败会返回__504__（而非代理服务器上的缓存） |  </div><div class="line">| proxy-revalidate | 与must-revalidate类似，但是仅能应用于共享缓存（如代理）|  </div><div class="line">| max-age=delta-seconds | 告知客户端该资源在delta-seconds秒内是新鲜的，除非还包含 max-stale 指令，否则客户端不期望接收一个陈旧的响应。 |  </div><div class="line">| s-maxage=delta-seconds | 同max-age，但仅应用于共享缓存（如代理） |  </div><div class="line">| cache-extension | 自定义扩展值，若服务器不识别该值将被忽略 |</div><div class="line"></div><div class="line">__no-cache__</div><div class="line"></div><div class="line"> - 如果 no-cache 指令没有规定field-name，那么一个缓存不能使用响应以满足接下来的、没有与源服务器重新验证的请求。这可以让源服务器防止缓存，甚至是已被配置的缓存，返回给客户端陈旧的响应。</div><div class="line"> - 如果 no-cache 指令规定了一个或多个 field-names，那么一个缓存可以使用响应来满足接下来的请求，遵守缓存的其他限制。然而，指定的 field-name 参数不能在响应中被发送给接下来的、没有与源服务器成功重新验证的请求。这可以让源服务器防止重用响应中的某个头，而仍然可以缓存响应的其他部分。</div><div class="line"></div><div class="line"></div><div class="line">----------</div><div class="line"></div><div class="line"></div><div class="line">### 请求首部字段   </div><div class="line">![请求首部字段][2]</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">#### if-Modified-Since: Last-Modified-value</div><div class="line">举个栗子：```If-Modified-Since: Thu, 31 Mar 2016 07:07:52 GMT</div></pre></td></tr></table></figure></p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>在RFC中规范了 Cache-Control 的格式为：<code>&quot;Cache-Control&quot; :&quot; cache-directive &quot;</code></p>
+<blockquote>
+<p>作为请求首部时，cache-directive的可选值</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no-cache</td>
+<td style="text-align:left">告知（代理）服务器不直接使用缓存，要求向原服务器发起请求</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td style="text-align:left">所有内容都不会被保存到缓存或 Internet临时文件中</td>
+</tr>
+<tr>
+<td>max-age=delta-seconds</td>
+<td style="text-align:left">告知服务器客户端希望接收一个存在时间（Age）不大于delta-seconds秒的资源</td>
+</tr>
+<tr>
+<td>max-stale[=delta-seconds]</td>
+<td style="text-align:left">告知（代理）服务器端愿意接收一个超过缓存时间的资源，若定义delta-seconds则为delta-seconds秒，若没有则为任意超出时间</td>
+</tr>
+<tr>
+<td>min-fresh=delta-seconds</td>
+<td style="text-align:left">所有内容都不会被保存到缓存或 Internet临时文件中</td>
+</tr>
+<tr>
+<td>no-transform</td>
+<td style="text-align:left">告知（代理）服务器客户端希望获取实体数据没有被转换（比如压缩）过的资源</td>
+</tr>
+<tr>
+<td>only-if-cached</td>
+<td style="text-align:left">告知（代理）服务器客户端希望获取缓存的内容（若有）， 而不用向原服务器发去请求</td>
+</tr>
+<tr>
+<td>cache-extension</td>
+<td style="text-align:left">自定义扩展值，若服务器不识别该值将被忽略掉</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>作为响应首部时，cache-directive 的可选值</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td style="text-align:left">指示响应可以被任何缓存所缓存，即使通常它只是非可缓存或可缓存到一个非共享缓存内</td>
+</tr>
+<tr>
+<td>private</td>
+<td style="text-align:left">指示响应信息的全部或者部分用于单个用户，而不能用一个共享缓存来缓存</td>
+</tr>
+<tr>
+<td>no-cache</td>
+<td style="text-align:left">可以缓存，但是只有在跟WEB服务器验证了其有效后，才能返回给客户端</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td style="text-align:left">所有内容不会被保存到缓存或Internet临时文件中，指令的目的是防止无心发布或是保留了敏感信息（例如，备份）</td>
+</tr>
+<tr>
+<td>no-transform</td>
+<td style="text-align:left">告知客户端缓存文件时不得对实体数据做任何改变。它对 <strong>转换某个实体体的媒体类型</strong> 很有用，例如，一个非透明的代理把图像转换格式，以节省缓存空间，或是减少慢速链接中的通信量</td>
+</tr>
+<tr>
+<td>only-if-cached</td>
+<td style="text-align:left">在某些情况下，如网络连接非常差时，客户端可能需要一个缓存，只返回目前已存储的那些响应，而不是重新加载，或与源服务器重新验证。要做到这一点，客户端可以在一个请求中包含该指令。</td>
+</tr>
+<tr>
+<td>must-revalidate</td>
+<td style="text-align:left">当前资源一定是向原服务器发去验证请求的，若请求失败会返回<strong>504</strong>（而非代理服务器上的缓存）</td>
+</tr>
+<tr>
+<td>proxy-revalidate</td>
+<td style="text-align:left">与must-revalidate类似，但是仅能应用于共享缓存（如代理）</td>
+</tr>
+<tr>
+<td>max-age=delta-seconds</td>
+<td style="text-align:left">告知客户端该资源在delta-seconds秒内是新鲜的，除非还包含 max-stale 指令，否则客户端不期望接收一个陈旧的响应。</td>
+</tr>
+<tr>
+<td>s-maxage=delta-seconds</td>
+<td style="text-align:left">同max-age，但仅应用于共享缓存（如代理）</td>
+</tr>
+<tr>
+<td>cache-extension</td>
+<td style="text-align:left">自定义扩展值，若服务器不识别该值将被忽略</td>
+</tr>
+</tbody>
+</table>
+<p><strong>no-cache</strong></p>
+<ul>
+<li>如果 no-cache 指令没有规定field-name，那么一个缓存不能使用响应以满足接下来的、没有与源服务器重新验证的请求。这可以让源服务器防止缓存，甚至是已被配置的缓存，返回给客户端陈旧的响应。</li>
+<li>如果 no-cache 指令规定了一个或多个 field-names，那么一个缓存可以使用响应来满足接下来的请求，遵守缓存的其他限制。然而，指定的 field-name 参数不能在响应中被发送给接下来的、没有与源服务器成功重新验证的请求。这可以让源服务器防止重用响应中的某个头，而仍然可以缓存响应的其他部分。</li>
+</ul>
+<hr>
+<h3 id="请求首部字段"><a href="#请求首部字段" class="headerlink" title="请求首部字段"></a>请求首部字段</h3><p><img src="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161240301-2050921595.png" alt="请求首部字段"></p>
+<h4 id="if-Modified-Since-Last-Modified-value"><a href="#if-Modified-Since-Last-Modified-value" class="headerlink" title="if-Modified-Since: Last-Modified-value"></a>if-Modified-Since: Last-Modified-value</h4><p>举个栗子：<code>If-Modified-Since: Thu, 31 Mar 2016 07:07:52 GMT</code></p>
 <p>   服务器以及缓存通过验证来判断内容是否改变，最常见的验证是通过<code>Last-Modified</code>头信息通信确定文档最后的修改时间，如果缓存有内容存储，会包含<code>Last-Modified</code>信息的，辅助<code>If-Modified-Since</code>请求，我们可以询问服务器内容是否改变了。</p>
 <h4 id="If-Unmodified-Since-Last-Modified-value"><a href="#If-Unmodified-Since-Last-Modified-value" class="headerlink" title="If-Unmodified-Since: Last-Modified-value"></a>If-Unmodified-Since: Last-Modified-value</h4><p>告诉服务器，若<code>Last-Modified</code>没有匹配上（资源在服务端的最后更新时间改变了），则应当返回 <strong>412</strong> (Precondition Failed) 状态码给客户端。</p>
 <p>当遇到下面情况时，<code>If-Unmodified-Since</code>字段会被忽略：</p>
@@ -202,21 +315,117 @@
 <li>实际上ETag并不是文件的版本号，而是一串可以代表该文件唯一的字符串（Apache中，ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的）。</li>
 </ul>
 <p><strong>⑴ If-None-Match: ETag-value</strong></p>
-<p>示例为  <figure class="highlight plain"><figcaption><span>"56fcccc8-1699"```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。</div><div class="line"></div><div class="line">当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。</div><div class="line"></div><div class="line">__⑵ If-Match: ETag-value__</div><div class="line"></div><div class="line">告诉服务器如果没有匹配到ETag，或者收到了“*”值而当前并没有该资源实体，则应当返回412(Precondition Failed) 状态码给客户端。否则服务器直接忽略该字段。</div><div class="line"></div><div class="line">If-Match 的一个应用场景是，客户端走PUT方法向服务端请求上传/更替资源，这时候可以通过 If-Match 传递资源的ETag。</div><div class="line"></div><div class="line"></div><div class="line">----------</div><div class="line"></div><div class="line"></div><div class="line">### 实体首部字段</div><div class="line">![实体首部字段][4]</div><div class="line"></div><div class="line"></div><div class="line">----------</div><div class="line"></div><div class="line"></div><div class="line">## 用户操作行为与缓存</div><div class="line">| 用户操作 | Expires/Cache-Controll | Last-Modified/ETag | </div><div class="line">| -------- | :-----: | :-----: | </div><div class="line">| 地址栏回车 | 有效 | 有效 | </div><div class="line">| 页面链接跳转 | 有效 | 有效 | </div><div class="line">| 新开窗口 | 有效 | 有效 | </div><div class="line">| 前进后退 | 有效 | 有效 |</div><div class="line">| F5刷新 | 无效 | 有效 | </div><div class="line">| Ctrl+F5 强制刷新 | 无效 | 有效 |</div><div class="line"></div><div class="line">  </div><div class="line"></div><div class="line">- 当用户在按__F5__进行刷新的时候，会忽略Expires/Cache-Control的设置，会再次向服务器发送请求，而Last-Modified/Etag还是有效的，服务器会根据情况判断返回__304__还是__200__</div><div class="line"> - 在没有设置__Cache-Contral__的情况下，设置Last-Modified和ETag缓存，会出现时而200（from cache），时而304 出现的情况 </div><div class="line">  </div><div class="line"> - 设置__Cache-Contral max-age__的情况下，max-age过期后首次刷新会出现304(如果有更新内容，则是200)，之后在max-age缓存过期之前刷新都是200（from cache）</div><div class="line">- 当用户使用__Ctrl+F5__进行强制刷新的时候，所有的缓存机制都将失效，重新从服务器获取资源。</div><div class="line"> </div><div class="line">----------</div><div class="line"></div><div class="line"></div><div class="line">## 200 or 304？</div><div class="line">### 两种状态码的差异</div><div class="line">- 200 OK (from cache) 是浏览器没有跟服务器确认，直接用了浏览器缓存</div><div class="line"></div><div class="line">- 304 Not Modified 是浏览器和服务器多确认了一次缓存有效性，再用的缓存</div><div class="line"></div><div class="line">### 何时返回何值</div><div class="line">在 Chrome 里面，长时间缓存有时候显示为 200 OK（from cache），有时候显示为 304 Not Modified。前者是直接按回车访问时发生，后者是按了 F5 刷新、或是 Entity Tag 没有正确禁用的情况。</div><div class="line"></div><div class="line">其实主要是浏览器对于两种再次访问的的模式处理情况不一样而已</div><div class="line"></div><div class="line">- __url load__ 访问</div><div class="line"></div><div class="line">- __Command+R或者F5__ 刷新</div><div class="line"></div><div class="line">&gt; 使用url load再次访问同一页面的时候</div><div class="line"></div><div class="line">浏览器获取资源的时候不会设置Cache-Control:max-age=0，所以设置的max-age如果仍有效的话会优先从本地cache中获取</div><div class="line"></div><div class="line">&gt; 使用刷新方式再次访问同一页面的时候</div><div class="line"></div><div class="line">发起Request的时候浏览器给 header 里设置的Cache-Control:max-age=0，一旦max-age为0，则不会从本地cache获取数据了，</div><div class="line">所以会发起一次http请求，根据header里传来的If-Modified-Since或者If-None-Match分别与Last-Modified，Etag做对比，从而做出返回304还是重新访问资源并重新缓存。</div><div class="line"></div><div class="line">----------</div><div class="line"></div><div class="line">## 现代缓存机制</div><div class="line">### 客户端（浏览器）缓存</div><div class="line">&gt; 下图对浏览器缓存机制过程描述的很详细</div><div class="line"></div><div class="line">![浏览器缓存机制][5]</div><div class="line"></div><div class="line">对于浏览器端的缓存，这些规则是在 __HTTP 协议头__和 html 页面的 __meta__ 标签中定义的。</div><div class="line">它们从__新鲜度__和__校验值__两个维度来决定浏览器是否可以直接使用缓存中的副本。</div><div class="line"></div><div class="line"> - __新鲜度（过期机制）__：也就是缓存副本有效期。一个缓存副本必须满足以下条件，浏览器才会认为它是有效的：</div><div class="line">  - 含有完整的过期时间控制头信息（HTTP协议报头），并且仍在有效期内；</div><div class="line"> </div><div class="line">  - 浏览器已经使用过这个缓存副本，并且在一个会话中已经检查过新鲜度；</div><div class="line"> - __校验值（验证机制）__： 服务器返回资源的时候有时在控制头信息带上这个资源的实体标签 ETag（Entity Tag），它可以用来作为浏览器再次请求过程的校验标识。如过发现校验标识不匹配，说明资源已经被修改或过期，浏览器需求重新获取资源内容。</div><div class="line"></div><div class="line">#### Node.js实现浏览器缓存</div><div class="line">- 条件请求</div><div class="line"></div><div class="line">请求头部设置了If-Modified-Since，浏览器向服务器请求资源，服务端返回304状态码，浏览器则会使用本地文件。</div></pre></td></tr></table></figure></p>
-<p>  // Last-Modified / If-Modified-Since缓存</p>
-<pre><code>let stat = fs.statSync(filePath)
-let lastModified = stat.mtime.toUTCString()
-res.setHeader(&quot;Last-Modified&quot;, lastModified)
-
-if (req.headers[&quot;if-modified-since&quot;] &amp;&amp; lastModified == req.headers[&quot;if-modified-since&quot;]) {
-    res.writeHead(304, &quot;Not Modified&quot;);
-    res.end();
-    return;
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Etag  Last-Modified 作为 hash 缓存</div></pre></td></tr></table></figure>
-<p>// Etag  Last-Modified 作为 hash 缓存<br>        let hashStr = fs.statSync(filePath).mtime.toUTCString()<br>        let hash = crypto.createHash(‘sha1’).update(hashStr).digest(‘base64’)<br>        if(req.headers[‘if-none-match’] == hash){<br>            res.writeHead(304, “Not Modified”);<br>            res.end();<br>            return;<br>        }<br>        res.setHeader(“Etag”, hash);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- 非条件请求</div><div class="line"></div><div class="line">Expires是一个GMT格式的时间字符串（GMT时间与北京时间相互可以转化），在服务器端设置Expires可以告知浏览器要缓存的内容，只要本地还存在这个文件，在过期时间之前，都不会再发起请求。</div></pre></td></tr></table></figure></p>
-<p>let handle = function (req, res) {<br>    fs.readFile(filename, function(err, file) {<br>        var expires = new Date();<br>        expires.setTime(expires.getTime() + 10 <em> 365 </em> 24 <em> 60 </em> 60 * 1000);<br>        res.setHeader(“Expires”, expires.toUTCString());<br>        res.writeHead(200, “Ok”);<br>        res.end(file);<br>    });<br>};<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">__*缺陷：如果用户本地时间和服务器时间不一致，那么这个缓存机制就存在问题。__</div><div class="line"></div><div class="line">Cache-Control可以避免这个问题，Cache-Control设置了一个max-age值，表示经过多长时间之后过期。</div></pre></td></tr></table></figure></p>
-<p>let handle = function (req, res) {<br>    fs.readFile(filename, function(err, file) {<br>        res.setHeader(“Cache-Control”, “max-age=” + 10 <em> 365 </em> 24 <em> 60 </em> 60 * 1000);<br>        res.writeHead(200, “Ok”);<br>        res.end(file);<br>    });<br>};<br>```</p>
+<p>示例为  <code>If-None-Match: &quot;56fcccc8-1699&quot;</code><br>告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。</p>
+<p>当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。</p>
+<p><strong>⑵ If-Match: ETag-value</strong></p>
+<p>告诉服务器如果没有匹配到ETag，或者收到了“*”值而当前并没有该资源实体，则应当返回412(Precondition Failed) 状态码给客户端。否则服务器直接忽略该字段。</p>
+<p>If-Match 的一个应用场景是，客户端走PUT方法向服务端请求上传/更替资源，这时候可以通过 If-Match 传递资源的ETag。</p>
+<hr>
+<h3 id="实体首部字段"><a href="#实体首部字段" class="headerlink" title="实体首部字段"></a>实体首部字段</h3><p><img src="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401171410441-767100632.png" alt="实体首部字段"></p>
+<hr>
+<h2 id="用户操作行为与缓存"><a href="#用户操作行为与缓存" class="headerlink" title="用户操作行为与缓存"></a>用户操作行为与缓存</h2><table>
+<thead>
+<tr>
+<th>用户操作</th>
+<th style="text-align:center">Expires/Cache-Controll</th>
+<th style="text-align:center">Last-Modified/ETag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地址栏回车</td>
+<td style="text-align:center">有效</td>
+<td style="text-align:center">有效</td>
+</tr>
+<tr>
+<td>页面链接跳转</td>
+<td style="text-align:center">有效</td>
+<td style="text-align:center">有效</td>
+</tr>
+<tr>
+<td>新开窗口</td>
+<td style="text-align:center">有效</td>
+<td style="text-align:center">有效</td>
+</tr>
+<tr>
+<td>前进后退</td>
+<td style="text-align:center">有效</td>
+<td style="text-align:center">有效</td>
+</tr>
+<tr>
+<td>F5刷新</td>
+<td style="text-align:center">无效</td>
+<td style="text-align:center">有效</td>
+</tr>
+<tr>
+<td>Ctrl+F5 强制刷新</td>
+<td style="text-align:center">无效</td>
+<td style="text-align:center">有效</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>当用户在按<strong>F5</strong>进行刷新的时候，会忽略Expires/Cache-Control的设置，会再次向服务器发送请求，而Last-Modified/Etag还是有效的，服务器会根据情况判断返回<strong>304</strong>还是<strong>200</strong></p>
+<ul>
+<li><p>在没有设置<strong>Cache-Contral</strong>的情况下，设置Last-Modified和ETag缓存，会出现时而200（from cache），时而304 出现的情况 </p>
+</li>
+<li><p>设置<strong>Cache-Contral max-age</strong>的情况下，max-age过期后首次刷新会出现304(如果有更新内容，则是200)，之后在max-age缓存过期之前刷新都是200（from cache）</p>
+</li>
+</ul>
+</li>
+<li>当用户使用<strong>Ctrl+F5</strong>进行强制刷新的时候，所有的缓存机制都将失效，重新从服务器获取资源。</li>
+</ul>
+<hr>
+<h2 id="200-or-304？"><a href="#200-or-304？" class="headerlink" title="200 or 304？"></a>200 or 304？</h2><h3 id="两种状态码的差异"><a href="#两种状态码的差异" class="headerlink" title="两种状态码的差异"></a>两种状态码的差异</h3><ul>
+<li><p>200 OK (from cache) 是浏览器没有跟服务器确认，直接用了浏览器缓存</p>
+</li>
+<li><p>304 Not Modified 是浏览器和服务器多确认了一次缓存有效性，再用的缓存</p>
+</li>
+</ul>
+<h3 id="何时返回何值"><a href="#何时返回何值" class="headerlink" title="何时返回何值"></a>何时返回何值</h3><p>在 Chrome 里面，长时间缓存有时候显示为 200 OK（from cache），有时候显示为 304 Not Modified。前者是直接按回车访问时发生，后者是按了 F5 刷新、或是 Entity Tag 没有正确禁用的情况。</p>
+<p>其实主要是浏览器对于两种再次访问的的模式处理情况不一样而已</p>
+<ul>
+<li><p><strong>url load</strong> 访问</p>
+</li>
+<li><p><strong>Command+R或者F5</strong> 刷新</p>
+</li>
+</ul>
+<blockquote>
+<p>使用url load再次访问同一页面的时候</p>
+</blockquote>
+<p>浏览器获取资源的时候不会设置Cache-Control:max-age=0，所以设置的max-age如果仍有效的话会优先从本地cache中获取</p>
+<blockquote>
+<p>使用刷新方式再次访问同一页面的时候</p>
+</blockquote>
+<p>发起Request的时候浏览器给 header 里设置的Cache-Control:max-age=0，一旦max-age为0，则不会从本地cache获取数据了，<br>所以会发起一次http请求，根据header里传来的If-Modified-Since或者If-None-Match分别与Last-Modified，Etag做对比，从而做出返回304还是重新访问资源并重新缓存。</p>
+<hr>
+<h2 id="现代缓存机制"><a href="#现代缓存机制" class="headerlink" title="现代缓存机制"></a>现代缓存机制</h2><h3 id="客户端（浏览器）缓存"><a href="#客户端（浏览器）缓存" class="headerlink" title="客户端（浏览器）缓存"></a>客户端（浏览器）缓存</h3><blockquote>
+<p>下图对浏览器缓存机制过程描述的很详细</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2017/3/4/256d423d1f942dc6c656b4c600b58316.png?imageView2/0/w/1280/h/960/ignore-error/1" alt="浏览器缓存机制"></p>
+<p>对于浏览器端的缓存，这些规则是在 <strong>HTTP 协议头</strong>和 html 页面的 <strong>meta</strong> 标签中定义的。<br>它们从<strong>新鲜度</strong>和<strong>校验值</strong>两个维度来决定浏览器是否可以直接使用缓存中的副本。</p>
+<ul>
+<li><p><strong>新鲜度（过期机制）</strong>：也就是缓存副本有效期。一个缓存副本必须满足以下条件，浏览器才会认为它是有效的：</p>
+<ul>
+<li><p>含有完整的过期时间控制头信息（HTTP协议报头），并且仍在有效期内；</p>
+</li>
+<li><p>浏览器已经使用过这个缓存副本，并且在一个会话中已经检查过新鲜度；</p>
+</li>
+</ul>
+</li>
+<li><strong>校验值（验证机制）</strong>： 服务器返回资源的时候有时在控制头信息带上这个资源的实体标签 ETag（Entity Tag），它可以用来作为浏览器再次请求过程的校验标识。如过发现校验标识不匹配，说明资源已经被修改或过期，浏览器需求重新获取资源内容。</li>
+</ul>
+<h4 id="Node-js实现浏览器缓存"><a href="#Node-js实现浏览器缓存" class="headerlink" title="Node.js实现浏览器缓存"></a>Node.js实现浏览器缓存</h4><ul>
+<li>条件请求</li>
+</ul>
+<p>请求头部设置了If-Modified-Since，浏览器向服务器请求资源，服务端返回304状态码，浏览器则会使用本地文件。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Last-Modified / If-Modified-Since缓存</span></div><div class="line"></div><div class="line">      <span class="keyword">let</span> stat = fs.statSync(filePath)</div><div class="line">      <span class="keyword">let</span> lastModified = stat.mtime.toUTCString()</div><div class="line">      res.setHeader(<span class="string">"Last-Modified"</span>, lastModified)</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (req.headers[<span class="string">"if-modified-since"</span>] &amp;&amp; lastModified == req.headers[<span class="string">"if-modified-since"</span>]) &#123;</div><div class="line">          res.writeHead(<span class="number">304</span>, <span class="string">"Not Modified"</span>);</div><div class="line">          res.end();</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">      &#125;</div></pre></td></tr></table></figure></p>
+<p>Etag  Last-Modified 作为 hash 缓存<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Etag  Last-Modified 作为 hash 缓存</span></div><div class="line">        <span class="keyword">let</span> hashStr = fs.statSync(filePath).mtime.toUTCString()</div><div class="line">        <span class="keyword">let</span> hash = crypto.createHash(<span class="string">'sha1'</span>).update(hashStr).digest(<span class="string">'base64'</span>)</div><div class="line">        <span class="keyword">if</span>(req.headers[<span class="string">'if-none-match'</span>] == hash)&#123;</div><div class="line">            res.writeHead(<span class="number">304</span>, <span class="string">"Not Modified"</span>);</div><div class="line">            res.end();</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        res.setHeader(<span class="string">"Etag"</span>, hash);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>非条件请求</li>
+</ul>
+<p>Expires是一个GMT格式的时间字符串（GMT时间与北京时间相互可以转化），在服务器端设置Expires可以告知浏览器要缓存的内容，只要本地还存在这个文件，在过期时间之前，都不会再发起请求。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> handle = <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">    fs.readFile(filename, <span class="function"><span class="keyword">function</span>(<span class="params">err, file</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> expires = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">        expires.setTime(expires.getTime() + <span class="number">10</span> * <span class="number">365</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);</div><div class="line">        res.setHeader(<span class="string">"Expires"</span>, expires.toUTCString());</div><div class="line">        res.writeHead(<span class="number">200</span>, <span class="string">"Ok"</span>);</div><div class="line">        res.end(file);</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>*缺陷：如果用户本地时间和服务器时间不一致，那么这个缓存机制就存在问题。</strong></p>
+<p>Cache-Control可以避免这个问题，Cache-Control设置了一个max-age值，表示经过多长时间之后过期。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> handle = <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">    fs.readFile(filename, <span class="function"><span class="keyword">function</span>(<span class="params">err, file</span>) </span>&#123;</div><div class="line">        res.setHeader(<span class="string">"Cache-Control"</span>, <span class="string">"max-age="</span> + <span class="number">10</span> * <span class="number">365</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);</div><div class="line">        res.writeHead(<span class="number">200</span>, <span class="string">"Ok"</span>);</div><div class="line">        res.end(file);</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <h3 id="Nginx缓存"><a href="#Nginx缓存" class="headerlink" title="Nginx缓存"></a>Nginx缓存</h3><ul>
 <li>nginx对哪些进行缓存？<ul>
 <li>缓存没有 Set-Cookie 的GET和HEAD的响应。</li>
@@ -246,11 +455,11 @@ if (req.headers[&quot;if-modified-since&quot;] &amp;&amp; lastModified == req.he
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浏览器缓存</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浏览器缓存</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -446,19 +655,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浏览器缓存</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -466,7 +663,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">浏览器缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">异步编程</a>
               </li>
             
             <div class="clearfix"></div>

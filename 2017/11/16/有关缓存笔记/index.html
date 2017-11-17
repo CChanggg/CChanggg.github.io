@@ -6,25 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>有关缓存笔记 | CChang:)</title>
+  <title>有关缓存笔记——用node实现缓存控制 | CChang:)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&amp;quot;Cache-Control&amp;quot; :&amp;quot; cache-directive &amp;quot;">
-<meta name="keywords" content="学习笔记,浏览器缓存,http">
+  <meta name="description" content="仓库地址 :yum: : github代码](https://github.com/CChanggg/learn-node/tree/master/Static_Resources_Server   六大待解决的问题 与缓存相关的HTTP首部字段主要有哪些？  这些HTTP首部字段之间的联系与区别？  HTTP缓存首部字段的优先级？  HTTP缓存首部字段的特点与局限性？  用户不同的页面刷新行为">
+<meta name="keywords" content="浏览器缓存,学习笔记,http,node">
 <meta property="og:type" content="article">
-<meta property="og:title" content="有关缓存笔记">
+<meta property="og:title" content="有关缓存笔记——用node实现缓存控制">
 <meta property="og:url" content="http://yoursite.com/2017/11/16/有关缓存笔记/index.html">
 <meta property="og:site_name" content="CChang:)">
-<meta property="og:description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&amp;quot;Cache-Control&amp;quot; :&amp;quot; cache-directive &amp;quot;">
+<meta property="og:description" content="仓库地址 :yum: : github代码](https://github.com/CChanggg/learn-node/tree/master/Static_Resources_Server   六大待解决的问题 与缓存相关的HTTP首部字段主要有哪些？  这些HTTP首部字段之间的联系与区别？  HTTP缓存首部字段的优先级？  HTTP缓存首部字段的特点与局限性？  用户不同的页面刷新行为">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161240301-2050921595.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161311394-1246877214.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401171410441-767100632.png">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/3/4/256d423d1f942dc6c656b4c600b58316.png?imageView2/0/w/1280/h/960/ignore-error/1">
-<meta property="og:updated_time" content="2017-11-16T12:57:38.890Z">
+<meta property="og:updated_time" content="2017-11-17T13:22:17.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="有关缓存笔记">
-<meta name="twitter:description" content="与缓存相关的http首部字段通用首部字段 Cache-Control在RFC中规范了 Cache-Control 的格式为：&amp;quot;Cache-Control&amp;quot; :&amp;quot; cache-directive &amp;quot;">
+<meta name="twitter:title" content="有关缓存笔记——用node实现缓存控制">
+<meta name="twitter:description" content="仓库地址 :yum: : github代码](https://github.com/CChanggg/learn-node/tree/master/Static_Resources_Server   六大待解决的问题 与缓存相关的HTTP首部字段主要有哪些？  这些HTTP首部字段之间的联系与区别？  HTTP缓存首部字段的优先级？  HTTP缓存首部字段的特点与局限性？  用户不同的页面刷新行为">
 <meta name="twitter:image" content="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png">
   
     <link rel="alternative" href="/atom.xml" title="CChang:)" type="application/atom+xml">
@@ -170,7 +170,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      有关缓存笔记
+      有关缓存笔记——用node实现缓存控制
     </h1>
   
 
@@ -183,7 +183,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="与缓存相关的http首部字段"><a href="#与缓存相关的http首部字段" class="headerlink" title="与缓存相关的http首部字段"></a>与缓存相关的http首部字段</h2><h3 id="通用首部字段"><a href="#通用首部字段" class="headerlink" title="通用首部字段"></a>通用首部字段</h3><p><img src="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png" alt="通用首部字段"></p>
+        <p><strong>仓库地址</strong> :yum: : <a href="https://github.com/CChanggg/learn-node/tree/master/Static_Resources_Server" target="_blank" rel="external">github代码](https://github.com/CChanggg/learn-node/tree/master/Static_Resources_Server</a> </p>
+<hr>
+<h2 id="六大待解决的问题"><a href="#六大待解决的问题" class="headerlink" title="六大待解决的问题"></a>六大待解决的问题</h2><ol>
+<li><p>与缓存相关的HTTP首部字段主要有哪些？</p>
+</li>
+<li><p>这些HTTP首部字段之间的联系与区别？</p>
+</li>
+<li><p>HTTP缓存首部字段的优先级？</p>
+</li>
+<li><p>HTTP缓存首部字段的特点与局限性？</p>
+</li>
+<li><p>用户不同的页面刷新行为的差别？</p>
+</li>
+<li><p>在实践中我们该用哪些报文头来控制缓存呢？</p>
+</li>
+</ol>
+<h2 id="与缓存相关的http首部字段"><a href="#与缓存相关的http首部字段" class="headerlink" title="与缓存相关的http首部字段"></a>与缓存相关的http首部字段</h2><h3 id="通用首部字段"><a href="#通用首部字段" class="headerlink" title="通用首部字段"></a>通用首部字段</h3><p><img src="http://images2015.cnblogs.com/blog/561179/201604/561179-20160401161150504-1030837643.png" alt="通用首部字段"></p>
 <h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>在RFC中规范了 Cache-Control 的格式为：<code>&quot;Cache-Control&quot; :&quot; cache-directive &quot;</code></p>
 <a id="more"></a>
 <blockquote>
@@ -456,15 +472,19 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浏览器缓存</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
         		</li>
       		
 		</ul>
@@ -656,15 +676,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color1">浏览器缓存</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,11 +684,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浏览器缓存</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">异步编程</a>
               </li>
             
             <div class="clearfix"></div>
